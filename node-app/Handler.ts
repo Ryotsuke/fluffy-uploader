@@ -1,6 +1,4 @@
-import {Site} from "./Site";
 import {Credentials} from "./Credentials";
-
 
 export class Handler {
     protected browserWindow:Electron.BrowserWindow;
@@ -11,7 +9,7 @@ export class Handler {
         this.constructWindow();
     }
 
-    protected constructWindow() {
+    protected constructWindow():void {
         throw new Error("Abstract method not implemented");
     }
 
