@@ -24,4 +24,8 @@ export class Handler {
     isLoggedIn():boolean {
         return false;
     }
+    
+    login():Promise<string> {
+        return Promise.reject<string>("Not implemented");
+    }
 }

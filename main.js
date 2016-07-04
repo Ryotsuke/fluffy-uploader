@@ -13,13 +13,24 @@ let mainWindow
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600})
+    mainWindow = new BrowserWindow({width: 800, height: 600});
 
-    let inkBunnyHandler = NodeApp.createHandler(new NodeApp.Credentials(NodeApp.Site.InkBunny, "Ryotsuke", "password"));
+    let appConfiguration = new NodeApp.Configuration();
+    appConfiguration.upsertAccount(new NodeApp.Credentials(NodeApp.Site.InkBunny, "Ryotsuke", "codename"));
+    appConfiguration.saveConfiguration();
+    let inkBunnyHandler = NodeApp.createHandler(appConfiguration.getAccount(NodeApp.Site.InkBunny));
+    inkBunnyHandler.login().then(function() {
+        "use strict";
+
+    }, function(error){
+        "use strict";
+        console.error(error);
+    });
+    
     // and load the index.html of the app.
-    //mainWindow.loadURL(`file://${__dirname}/index.html`)
-    mainWindow.loadURL(`https://inkbunny.net/filesedit.php?sales=no&wizardmode=yes`)
-    var wc = mainWindow.webContents;
+    mainWindow.loadURL(`file://${__dirname}/index.html`);
+    //mainWindow.loadURL(`https://inkbunny.net/filesedit.php?sales=no&wizardmode=yes`)
+    /*var wc = mainWindow.webContents;
 
     try {
         wc.debugger.attach("1.1");
@@ -45,7 +56,7 @@ function createWindow() {
                 });
             });
         });
-    });
+    });*/
     
     // Open the DevTools.
     //mainWindow.webContents.openDevTools()
@@ -56,7 +67,7 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null
-    })
+    });
 
 
     let win = new BrowserWindow({width: 800, height: 1500, show: false});
