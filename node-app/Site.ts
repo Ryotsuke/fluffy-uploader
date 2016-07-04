@@ -1,0 +1,1 @@
+export enum Site {FurAffinity, InkBunny, SoFurry, Weasyl, FurryNetwork};

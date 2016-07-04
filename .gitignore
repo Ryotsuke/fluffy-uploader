@@ -1,0 +1,7 @@
+node_modules
+/.idea
+/index.html.backup
+*.map
+/app/*.js
+/node-app/*.js
+/typings
